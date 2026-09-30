@@ -53,7 +53,7 @@ public class LibroController {
 
     private void configurarTabla(){
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colTitulo.setCellValueFactory(new PropertyValueFactory<>("título"));
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
@@ -135,7 +135,12 @@ public class LibroController {
 
     @FXML
     private void limpiarCampos(){
-
+        txtID.clear();
+        txtAutor.clear();
+        txtPrecio.clear();
+        txtStock.clear();
+        txtTitulo.clear();
+        cmbCategoria.getSelectionModel().clearSelection();
     }
 
 }
