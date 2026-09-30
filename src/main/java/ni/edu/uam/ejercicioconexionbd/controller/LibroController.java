@@ -86,6 +86,7 @@ public class LibroController {
                 libro.setStock(resultSet.getInt("stock"));
                 listaLibros.add(libro);
             }
+            tblLibros.setItems(listaLibros);
         }catch (SQLException ex){
             ex.printStackTrace();
 
