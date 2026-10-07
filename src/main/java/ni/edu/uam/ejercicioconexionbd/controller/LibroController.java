@@ -49,6 +49,22 @@ public class LibroController {
         configurarTabla();
         configurarComboBox();
         cargarLibros();
+
+        //Cada vez que se selecciona una fila del TableView, obtenemos ese objeto
+        tblLibros.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                cargarLibroSeleccionado(newValue);
+            }
+        });
+    }
+
+    //Encargado de mapear los datos en los TextFields
+    private void cargarLibroSeleccionado(Libro libro){
+        txtTitulo.setText(libro.getTitulo());
+        txtAutor.setText(libro.getAutor());
+        cmbCategoria.setValue(libro.getCategoria());
+        txtPrecio.setText(String.valueOf(libro.getPrecio()));
+        txtStock.setText(String.valueOf(libro.getStock()));
     }
 
     private void configurarTabla(){
@@ -135,7 +151,6 @@ public class LibroController {
 
     @FXML
     private void limpiarCampos(){
-        txtID.clear();
         txtAutor.clear();
         txtPrecio.clear();
         txtStock.clear();
@@ -143,5 +158,78 @@ public class LibroController {
         cmbCategoria.getSelectionModel().clearSelection();
     }
 
+    @FXML
+    private void eliminarLibro(){
+        Libro libroSeleccionado = tblLibros.getSelectionModel().getSelectedItem();
+        if(libroSeleccionado == null){
+            mostrarAlerta(Alert.AlertType.WARNING, "Selección requerida", "No hay libro seleccionado", "Seleccione un libro de la lista");
+            return;
+        }
+        if (!validarCampos()){
+            return;
+        }
+
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmación");
+        confirmacion.setHeaderText(null);
+        confirmacion.setContentText("¿Está seguro que desea eliminar el registro de libro?");
+        if (confirmacion.showAndWait().isEmpty() || confirmacion.getResult() == ButtonType.OK){
+            return;
+        }
+        // Elminicación física - borrar la fila de la tabla
+        String sql = "DELETE FROM libro WHERE id =?";
+
+        try(
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ){
+            statement.setInt(1, libroSeleccionado.getId());
+
+            int filasEliminadas = statement.executeUpdate();
+            if (filasEliminadas > 0){
+                mostrarAlerta(Alert.AlertType.INFORMATION, "Registro eliminado", "Eliminación completada", "El libro fue eliminado exitosamente");
+                limpiarCampos();
+                cargarLibros();
+            }
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void actualizarLibro(){
+        Libro libroSeleccionado = tblLibros.getSelectionModel().getSelectedItem();
+        if(libroSeleccionado == null){
+            mostrarAlerta(Alert.AlertType.WARNING, "Selección requerida", "No hay un libro seleccionado", "Seleccione un libro de la lista");
+            return;
+        }
+        if(!validarCampos()){
+            return;
+        }
+
+        String sql = "UPDATE libro SET titulo = ?, autor = ?, categoria = ?, precio = ?, stock = ? WHERE id = ?";
+
+        try(
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ){
+            statement.setString(1, txtTitulo.getText());
+            statement.setString(2, txtAutor.getText());
+            statement.setString(3, cmbCategoria.getValue());
+            statement.setDouble(4, Double.parseDouble(txtPrecio.getText()));
+            statement.setInt(5, Integer.parseInt(txtStock.getText()));
+            statement.setInt(6, libroSeleccionado.getId());
+
+            int filasActualizadas = statement.executeUpdate();
+            if (filasActualizadas > 0){
+                mostrarAlerta(Alert.AlertType.INFORMATION, "Registro actualizado", "Actualización completada", "El libro fue actualizado correctamente");
+                limpiarCampos();
+                cargarLibros();
+            }
+
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
 }
 

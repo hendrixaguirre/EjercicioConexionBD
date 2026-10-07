@@ -12,7 +12,7 @@
          </font>
       </Label>
       <Separator layoutY="87.0" prefHeight="2.0" prefWidth="564.0" />
-      <GridPane  layoutX="26.0" layoutY="110.0" prefHeight="222.0" prefWidth="511.0">
+      <GridPane layoutX="26.0" layoutY="110.0" prefHeight="222.0" prefWidth="511.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="24.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="431.0" minWidth="10.0" prefWidth="431.0" />
@@ -20,31 +20,28 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="ID:" />
-            <TextField fx:id="txtID" promptText="ID del libro" GridPane.columnIndex="1" />
-            <Label text="Título:" GridPane.rowIndex="1" />
-            <TextField fx:id="txtTitulo" promptText="Título de libro" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Autor:" GridPane.rowIndex="2" />
-            <TextField fx:id="txtAutor" promptText="Autor de libro" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Categoría:" GridPane.rowIndex="3" />
-            <ComboBox fx:id="cmbCategoria" prefHeight="25.0" prefWidth="265.0" promptText="Seleccione categoría de libro" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="Precio:" GridPane.rowIndex="4" />
-            <TextField fx:id="txtPrecio" promptText="Precio de libro" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Stock:" GridPane.rowIndex="5" />
-            <TextField fx:id="txtStock" promptText="Stock de libro" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="Título:" />
+            <TextField fx:id="txtTitulo" promptText="Título de libro" GridPane.columnIndex="1" />
+            <Label text="Autor:" GridPane.rowIndex="1" />
+            <TextField fx:id="txtAutor" promptText="Autor de libro" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Categoría:" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cmbCategoria" prefHeight="25.0" prefWidth="265.0" promptText="Seleccione categoría de libro" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Precio:" GridPane.rowIndex="3" />
+            <TextField fx:id="txtPrecio" promptText="Precio de libro" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Stock:" GridPane.rowIndex="4" />
+            <TextField fx:id="txtStock" promptText="Stock de libro" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Button fx:id="btnGuardar" layoutX="275.0" layoutY="605.0" mnemonicParsing="false" onAction="#guardarLibro" prefHeight="43.0" prefWidth="78.0" text="Guardar" />
-      <Button fx:id="btnLimpiar" layoutX="363.0" layoutY="606.0" mnemonicParsing="false" onAction="#limpiarCampos" prefHeight="43.0" prefWidth="78.0" text="Limpiar" />
-      <Button fx:id="btnActualizarDatos" layoutX="451.0" layoutY="606.0" mnemonicParsing="false" onAction="#cargarLibros" prefHeight="43.0" prefWidth="78.0" text="Actualizar" />
-      <Label layoutX="26.0" layoutY="339.0" text="Lista de libros:" />
-      <TableView fx:id="tblLibros" layoutX="20.0" layoutY="371.0" prefHeight="212.0" prefWidth="525.0">
+      <Button fx:id="btnGuardar" layoutX="212.0" layoutY="347.0" mnemonicParsing="false" onAction="#guardarLibro" prefHeight="30.0" prefWidth="78.0" text="Guardar" />
+      <Button fx:id="btnLimpiar" layoutX="300.0" layoutY="347.0" mnemonicParsing="false" onAction="#limpiarCampos" prefHeight="30.0" prefWidth="78.0" text="Limpiar" />
+      <Button fx:id="btnActualizarDatos" layoutX="457.0" layoutY="348.0" mnemonicParsing="false" onAction="#cargarLibros" prefHeight="30.0" prefWidth="78.0" text="Actualizar" />
+      <Label layoutX="26.0" layoutY="391.0" text="Lista de libros:" />
+      <TableView fx:id="tblLibros" layoutX="20.0" layoutY="420.0" prefHeight="235.0" prefWidth="525.0">
         <columns>
           <TableColumn fx:id="colID" prefWidth="62.0" text="ID" />
           <TableColumn fx:id="colTitulo" prefWidth="105.0" text="Título" />
@@ -54,5 +51,7 @@
             <TableColumn fx:id="colStock" prefWidth="75.0" text="Stock" />
         </columns>
       </TableView>
+      <Button fx:id="btnActualizarLibro" layoutX="90.0" layoutY="347.0" mnemonicParsing="false" onAction="#actualizarLibro" prefHeight="30.0" prefWidth="112.0" text="Actualizar registro" />
+      <Button fx:id="btnEliminarLibro" layoutX="388.0" layoutY="348.0" mnemonicParsing="false" onAction="#eliminarLibro" prefHeight="30.0" prefWidth="59.0" text="Eliminar" />
    </children>
 </AnchorPane>
